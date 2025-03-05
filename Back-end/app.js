@@ -12,6 +12,13 @@ import userRoute from "./routes/userRoute.js"
 
 const PORT = process.env.PORT || 5000;
 
+const allowedOrigins = [
+  "http://localhost:3000",  
+  "https://my-chat-app-prod.onrender.com",  
+];
+
+
+
 
 const __dirname = path.resolve();
 
@@ -19,7 +26,7 @@ connectDB();
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: allowedOrigins,
     credentials: true, // Allow cookies
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
