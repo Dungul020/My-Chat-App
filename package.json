@@ -4,7 +4,7 @@
   "main": "server.js",
   "scripts": {
     "dev": "nodemon Back-end/app.js",
-    "start": "nodemon Back-end/app.js",
+    "start": "node Back-end/app.js",
     "build":"npm install && npm install --prefix Front-end && npm run build --prefix Front-end"
   },
   "keywords": [],
