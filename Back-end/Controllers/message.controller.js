@@ -1,37 +1,43 @@
+import Conversation from "../models/conversation.model.js";
+import Message from "../models/message.model.js";
 
-import conversation from "../models/conversation.model.js";
-
-
-export const  sendMessage = async (req,res) =>{
+export const sendMessage = async (req, res) => {
   try {
-    const {message} = req.body;
-    const {id : recieverId} = req.params;
-    const {userId} = req.user._id;
-   let Conversation = await conversation.findOne({
-        participants : {$all : [senderId,recieverId]},
-    })
-    if(!Conversation){
-        Conversation = await conversation.create({
-            participants : [senderId,recieverId]
-    }) }
-    const newMessage = new message ({
-        senderId,
-        recieverId,
-        message
-    })
-    if(newMessage){
-        conversation.message.push(newMessage._id)
-        res.status(201).json(newMessage);
+    const { message } = req.body; 
+    const { id: receiverId } = req.params;
+    const senderId = req.user._id; 
+
+    let ConversationInstance = await Conversation.findOne({
+      participants: { $all: [senderId, receiverId] },
+    });
+
+    if (!ConversationInstance) {
+      ConversationInstance = await Conversation.create({
+        participants: [senderId, receiverId],
+        messages: [],
+      });
     }
 
-     await conversation.Save();
-     await newMessage.Save();
+    const newMessage = new Message({
+      senderId,
+      receiverId,
+      messageContent:message,
+    });
 
+    ConversationInstance.messages.push(newMessage._id);
+
+    
+    await ConversationInstance.save();
+    await newMessage.save();
+
+    res.status(201).json(newMessage);
   } catch (error) {
-    console.log("error in sendmessage controller" ,  error.message); 
-    res.status(500).json({error:"Internal server error"});
+    console.log("Error in sendMessage controller:", error.message);
+    res.status(500).json({ error: "Internal server error" });
   }
-}
+};
+
+
 
 export const  getMessage = async (req,res) =>{
   try {
@@ -39,17 +45,17 @@ export const  getMessage = async (req,res) =>{
     const {id : userToChatId} = req.params;
     const senderId = req.user._id;
     
-   const Conversation = await conversation.findOne({
+   const ConversationInstance = await Conversation.findOne({
       participants : {$all : [senderId,userToChatId]},
-  }).populate('message')
+  }).populate('messages')
 
 
 
 
-    if(!Conversation){
+    if(!ConversationInstance){
      return  res.status(200).json([]);
       }
-      res.status(201).json(conversation.message);
+      res.status(201).json(ConversationInstance.messages);
     
 
      

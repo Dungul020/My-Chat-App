@@ -4,8 +4,6 @@ const models ={
     User,
 }
 
-// export {
-//     User,
-// }
+
 
 export default models;

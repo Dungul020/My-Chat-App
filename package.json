@@ -4,7 +4,8 @@
   "main": "server.js",
   "scripts": {
     "dev": "nodemon Back-end/app.js",
-    "start": "nodemon Back-end/app.js"
+    "start": "nodemon Back-end/app.js",
+    "build":"npm install && npm install --prefix Front-end && npm run build --prefix Front-end"
   },
   "keywords": [],
   "author": "Kwenzo",
@@ -21,6 +22,9 @@
     "socket.io": "^4.8.1"
   },
   "devDependencies": {
-    "nodemon": "^3.1.9"
+    "nodemon": "^3.1.9",
+    "tailwindcss": "^3.3.0",
+    "postcss": "^8.4.0",
+    "autoprefixer": "^10.4.0"
   }
 }

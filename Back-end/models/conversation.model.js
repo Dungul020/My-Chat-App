@@ -5,14 +5,15 @@ const conversationCollection = new mongoose.Schema(
     participants: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "user", // Ensure this matches the actual model name (e.g., "User")
+        ref: "User", 
       },
     ],
+    messages: [{ type: mongoose.Schema.Types.ObjectId, ref: "Message" }],
 
     conversation: [
       {
-        type: mongoose.Schema.Types.ObjectId, // The is a problem here 
-        ref: "user", // Again, check if this is the correct reference
+        type: mongoose.Schema.Types.ObjectId,  
+        ref: "User", 
         default: [],
       },
     ],

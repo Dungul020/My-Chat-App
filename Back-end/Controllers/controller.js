@@ -13,11 +13,12 @@ export async function signupUser(req,res){
         if(user){
             return  res.status(400).json({error:"Oops it seems like your account already registered  login to acess your account"}); 
         }
-        //Hash Password
+        
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const maleprofilepic = 'https://avatar.iran.liara.run/public/boy?username=${username}'
-        const femaleprofilepic='https://avatar.iran.liara.run/public/girl?username=${username}'
+       
+        const maleprofilepic = `https://avatar.iran.liara.run/public/boy?username=${username}`;
+        const femaleprofilepic = "https://avatar.iran.liara.run/public/girl?username=${username}";
 
         const newUser = new User({
             fullname,
@@ -27,24 +28,24 @@ export async function signupUser(req,res){
             password:hashedPassword,
             confirmpassword:hashedPassword,
             cellphone,
-            profilepic:gender==="male"? maleprofilepic:femaleprofilepic
+            profilepicture:gender === "male" ? maleprofilepic:femaleprofilepic
         })
         if(newUser){
-           generateToken(newUser,_id,res);
+           generateToken(newUser._id,res);
         }
         await newUser.save();
 
         res.status(201).json({
-            id:newUser._id, //try removing _
+            id:newUser._id, 
             fullname:newUser.fullname,
             username:newUser.username,
-            profilepic:newUser.profilepic,
+            profilepicture:newUser.profilepicture
         });
 
 }
  
     catch (error) {
-        console.error("Signup Error:", error); // Log the error in your terminal
+        console.error("Signup Error:", error); 
         res.status(500).json({ error: error.message || "Internal Server Error" });
     }
     
@@ -62,16 +63,16 @@ export async function loginUser(req,res){
         }
         generateToken(user._id,res);
         res.status(201).json({
-            id:user._id, // remove _
+            id:user._id, 
             fullname:user.fullname,
             username:user.username,
-           // profilepic:newUser.profilepic,
+            profilepicture:user.profilepicture,
         });
 
 
     } catch (error) {
 
-        console.error("Signin Error:", error); // Log the error in your terminal
+        console.error("Signin Error:", error); 
         res.status(500).json({ error: error.message || "Internal Server Error" });
     }
 
@@ -88,5 +89,5 @@ export const  logoutUser = async (req,res) =>{
     }
 };
 
-//export default signupUser;
+
 
