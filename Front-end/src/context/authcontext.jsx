@@ -17,7 +17,7 @@ export const AuthContextProvider = ({ children }) => {
       if (!storedUser || !storedUser._id) return; 
 
       try {
-        const res = await fetch(`http://localhost:5000/api/users/${storedUser._id}`);
+        const res = await fetch(`https://my-chat-app-prod.onrender.com/api/users/${storedUser._id}`);
         const data = await res.json();
         if (res.ok) {
           setAuthUser(data); 
