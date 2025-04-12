@@ -28,6 +28,7 @@ const Message = ({ message }) => {
           
           <span className="absolute bottom-0 left-0 w-2 h-2 border-white rounded-full"></span> 
         </div>
+             <span className="absolute bottom-0 left-0 w-2 h-2 bg-green-500 border-2 border-white rounded-full"></span> {/* Simple online indicator */}
         </Badge>
       )}
 
@@ -43,6 +44,7 @@ const Message = ({ message }) => {
          
          <span className="absolute bottom-0 left-0 w-2 h-2 border-white rounded-full"></span> 
        </div>
+           <span className="absolute bottom-0 left-0 w-2 h-2 bg-green-500 border-2 border-white rounded-full"></span> {/* Simple online indicator */}
        </Badge>
       )}
       
