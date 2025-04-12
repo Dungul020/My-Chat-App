@@ -3,7 +3,7 @@
 import { useAuthContext } from "../../src/context/authcontext.jsx";
 import useConversation from "../../pages/Zustand/userconversation.js";
 import { extractTime } from "../../src/utils/extracttime.js";
-import { Avatar, Badge } from "@material-tailwind/react";
+import { Badge } from "@material-tailwind/react";
 
 const Message = ({ message }) => {
   const { authUser } = useAuthContext();
@@ -16,10 +16,7 @@ const Message = ({ message }) => {
   const bubbleBgColor = fromMe ? "bg-blue-500 text-white" : "bg-gray-300 text-black";
   const shakeClass = message.shouldShake ? "animate-shake" : "";
 
-  console.log("authUser in Message:", authUser);
-  console.log("selectedConversation in Message:", selectedConversation);
-
-  console.log("ProfilePic URL:", ProfilePic);
+  
 
   return (
     <div className={`w-full my-2 ${chatClassName} gap-3`}>
@@ -29,7 +26,7 @@ const Message = ({ message }) => {
                   
           <img src={ProfilePic} alt="User Profile" className="w-full h-full object-cover" onError={(e) => { e.target.src = "/images/default-avatar.png"; }} />
           
-          <span className="absolute bottom-0 left-0 w-2 h-2 border-white rounded-full"></span> {/* Simple online indicator */}
+          <span className="absolute bottom-0 left-0 w-2 h-2 border-white rounded-full"></span> 
         </div>
         </Badge>
       )}
@@ -44,7 +41,7 @@ const Message = ({ message }) => {
                  
          <img src={ProfilePic} alt="My Profile" className="w-full h-full object-cover" onError={(e) => { e.target.src = "/images/default-avatar.png"; }} />
          
-         <span className="absolute bottom-0 left-0 w-2 h-2 border-white rounded-full"></span> {/* Simple online indicator */}
+         <span className="absolute bottom-0 left-0 w-2 h-2 border-white rounded-full"></span> 
        </div>
        </Badge>
       )}
