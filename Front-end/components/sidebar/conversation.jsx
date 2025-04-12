@@ -24,8 +24,8 @@ function Conversation({conversation,lastIdx,emoji}) {
   <div className="w-12 h-12 rounded-full overflow-hidden">
     <img src={conversation.profilepicture} alt="profilepic" className="w-full h-full object-cover" />
   </div>
-  {/* Online status indicator (always online) */}
-  {/* <span className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 border-2 border-white rounded-full"></span> */}
+ {/* Online status indicator (always online) */}
+ <span className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 border-2 border-white rounded-full"></span>
 </div>
 
 
